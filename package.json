@@ -1,0 +1,23 @@
+{
+  "name": "load-balancer-api",
+  "version": "1.0.0",
+  "description": "Advanced Load Balancer with Consistent Hashing",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "test": "node src/test.js"
+  },
+  "keywords": [
+    "load-balancer",
+    "consistent-hashing",
+    "routing",
+    "api"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {}
+}

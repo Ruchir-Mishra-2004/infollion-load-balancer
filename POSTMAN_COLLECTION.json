@@ -1,0 +1,383 @@
+{
+  "info": {
+    "_postman_id": "lb-api-collection",
+    "name": "Load Balancer API",
+    "description": "Advanced Load Balancer with Consistent Hashing - API Testing Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Root - API Documentation",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000"
+        },
+        "description": "Get API documentation and available endpoints"
+      }
+    },
+    {
+      "name": "2. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000"
+        },
+        "description": "Check if server is running"
+      }
+    },
+    {
+      "name": "Route - Single Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ip\": \"192.168.1.100\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/lb/route",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "route"]
+        },
+        "description": "Route a request to a node based on IP address"
+      }
+    },
+    {
+      "name": "Route - Generate Random IP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/lb/route",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "route"]
+        },
+        "description": "Route a request with randomly generated IP"
+      }
+    },
+    {
+      "name": "Simulate Traffic - 10 Requests",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/simulate?count=10",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "simulate"],
+          "query": [
+            {
+              "key": "count",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Simulate 10 incoming requests with random IPs"
+      }
+    },
+    {
+      "name": "Simulate Traffic - 50 Requests",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/simulate?count=50",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "simulate"],
+          "query": [
+            {
+              "key": "count",
+              "value": "50"
+            }
+          ]
+        },
+        "description": "Simulate 50 incoming requests"
+      }
+    },
+    {
+      "name": "Simulate Traffic - 100 Requests",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/simulate?count=100",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "simulate"],
+          "query": [
+            {
+              "key": "count",
+              "value": "100"
+            }
+          ]
+        },
+        "description": "Simulate 100 incoming requests to see load distribution"
+      }
+    },
+    {
+      "name": "Get Metrics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/metrics",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "metrics"]
+        },
+        "description": "Get comprehensive load balancer metrics and statistics"
+      }
+    },
+    {
+      "name": "Get Request Logs - Last 20",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/logs?limit=20",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "logs"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "20"
+            }
+          ]
+        },
+        "description": "Get request history with IP and node routing information"
+      }
+    },
+    {
+      "name": "Get Request Logs - Last 50",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/logs?limit=50",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "logs"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "50"
+            }
+          ]
+        },
+        "description": "Get more detailed request history"
+      }
+    },
+    {
+      "name": "Health - Check Node-A",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/health/Node-A",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "health", "Node-A"]
+        },
+        "description": "Get health status of Node-A"
+      }
+    },
+    {
+      "name": "Health - Check Node-B",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/health/Node-B",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "health", "Node-B"]
+        },
+        "description": "Get health status of Node-B"
+      }
+    },
+    {
+      "name": "Health - Toggle Node-B",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/health/Node-B/toggle",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "health", "Node-B", "toggle"]
+        },
+        "description": "Toggle health status of a node (for testing fallback)"
+      }
+    },
+    {
+      "name": "Nodes - Add Node-D",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"node\": \"Node-D\",\n  \"weight\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/lb/nodes",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "nodes"]
+        },
+        "description": "Add a new node to the load balancer"
+      }
+    },
+    {
+      "name": "Nodes - Add Node-E with Weight 2",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"node\": \"Node-E\",\n  \"weight\": 2\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/lb/nodes",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "nodes"]
+        },
+        "description": "Add a new node with higher weight (gets more traffic)"
+      }
+    },
+    {
+      "name": "Nodes - Remove Node-D",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/nodes/Node-D",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "nodes", "Node-D"]
+        },
+        "description": "Remove a node from the load balancer"
+      }
+    },
+    {
+      "name": "Nodes - Update Node-A Weight to 3",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"weight\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/lb/nodes/Node-A/weight",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "nodes", "Node-A", "weight"]
+        },
+        "description": "Update weight of Node-A to 3 (gets 3x more traffic)"
+      }
+    },
+    {
+      "name": "Nodes - Update Node-B Weight to 1",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"weight\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/lb/nodes/Node-B/weight",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "nodes", "Node-B", "weight"]
+        },
+        "description": "Reset Node-B weight to normal"
+      }
+    },
+    {
+      "name": "Reset - Clear All Metrics",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/lb/reset",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "lb", "reset"]
+        },
+        "description": "Reset all metrics and logs"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
