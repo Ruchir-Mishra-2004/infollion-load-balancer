@@ -33,6 +33,9 @@ curl http://localhost:3000/api/lb/metrics
 
 ---
 
+<img width="1274" height="795" alt="image" src="https://github.com/user-attachments/assets/8b29d76c-b935-4a36-9ef4-6ea94fb55fd1" />
+
+
 ## 🎯 Test Scenarios
 
 ### Scenario 1: Verify Consistent Hashing ⭐
