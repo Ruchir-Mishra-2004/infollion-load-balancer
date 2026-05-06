@@ -81,6 +81,62 @@ This will run the complete test suite including:
 - Metrics collection
 - Rate limiting
 
+## 🧪 Testing with Postman (Recommended)
+
+### Import Postman Collection
+
+1. **Download Postman**: https://www.postman.com/downloads/
+2. **Open Postman** and click **Import** (top-left)
+3. **Upload File** → Select `POSTMAN_COLLECTION.json` from this repository
+4. **All 20+ API requests are now ready to use!**
+
+### Quick Test Flow
+
+#### Test 1: Consistent Hashing
+```
+1. POST /api/lb/route → {"ip": "192.168.1.100"} → Note the node
+2. POST /api/lb/route → {"ip": "192.168.1.100"} → Should be SAME node
+✓ Proof of consistent hashing working!
+```
+
+#### Test 2: Load Distribution
+```
+3. GET /api/lb/simulate?count=50 → Simulates 50 requests
+4. GET /api/lb/metrics → View distribution across nodes
+✓ See traffic balanced according to weights!
+```
+
+#### Test 3: Dynamic Nodes
+```
+5. POST /api/lb/nodes → {"node": "Node-D", "weight": 2}
+6. GET /api/lb/simulate?count=50 → Resimulate
+7. GET /api/lb/metrics → Node-D should now appear
+✓ Dynamic node management works!
+```
+
+#### Test 4: Health Checks
+```
+8. POST /api/lb/health/Node-A/toggle → Mark unhealthy
+9. GET /api/lb/simulate?count=10 → Routes to healthy nodes
+10. GET /api/lb/metrics → See failure handling
+✓ Fallback to healthy nodes working!
+```
+
+### All Available Endpoints in Postman
+
+| # | Method | Endpoint | Purpose |
+|---|--------|----------|---------|
+| 1 | POST | `/api/lb/route` | Route single IP (core feature) |
+| 2 | GET | `/api/lb/simulate?count=50` | Generate traffic |
+| 3 | GET | `/api/lb/metrics` | View metrics dashboard |
+| 4 | GET | `/api/lb/logs?limit=10` | View request logs |
+| 5 | GET | `/api/lb/health/:node` | Check node health |
+| 6 | POST | `/api/lb/health/:node/toggle` | Toggle health status |
+| 7 | POST | `/api/lb/nodes` | Add new node |
+| 8 | DELETE | `/api/lb/nodes/:node` | Remove node |
+| 9 | PUT | `/api/lb/nodes/:node/weight` | Update node weight |
+| 10 | POST | `/api/lb/reset` | Reset all metrics |
+
 ## 📊 Algorithm Explanation
 
 ### Consistent Hashing
@@ -209,38 +265,6 @@ Content-Type: application/json
 POST /api/lb/reset
 ```
 Clear all metrics and logs.
-
-## 🧪 Testing with Postman
-
-1. **Import the Postman Collection**:
-   - Open Postman
-   - Click `Import` → `Upload File`
-   - Select `POSTMAN_COLLECTION.json`
-
-2. **Or manually test**:
-
-```bash
-# Route a request
-curl -X POST http://localhost:3000/api/lb/route \
-  -H "Content-Type: application/json" \
-  -d '{"ip":"192.168.1.100"}'
-
-# Simulate 10 requests
-curl http://localhost:3000/api/lb/simulate?count=10
-
-# Get metrics
-curl http://localhost:3000/api/lb/metrics
-
-# Add a node
-curl -X POST http://localhost:3000/api/lb/nodes \
-  -H "Content-Type: application/json" \
-  -d '{"node":"Node-D","weight":1}'
-
-# Route same IP again (should go to same node)
-curl -X POST http://localhost:3000/api/lb/route \
-  -H "Content-Type: application/json" \
-  -d '{"ip":"192.168.1.100"}'
-```
 
 ## 📊 Example Workflow
 
